@@ -1,63 +1,34 @@
 import { Document } from '@contentful/rich-text-types';
+import { EntrySkeletonType } from "contentful";
 
-export type BlogItemM = {
+export type ExtendedBlogItem = BlogItem & EntrySkeletonType;
+
+export type BlogItem = {
   fields: {
     title: string;
     slug: string;
     date: Date;
     content: Document;
+    thumbnail: ImageData
   }
 }
 
-export type ContentField = {
-  nodeType: string;
-  data: any;
-  content: ContentField | ContentField[];
-}
-export type ContentArray = {
-  nodeType: string;
-  data: any;
-  content: ContentField[];
+export type ImageData = {
+  fields: {
+    file: {
+      url: string;
+    }
+  }
 }
 
-export type BlogFields = {
-  title: string;
-  slug: string;
-  date: Date;
-  mainData: any;
-  mainNodeType: string;
-  contents: ContentArray[];
-};
+export type BlogItems = ReadonlyArray<BlogItem>;
+
+export type BlogQueryResult = {
+  items: BlogItems;
+}
 
 export type BlogPageProps = {
   params: {
     slug: string;
   };
-};
-
-export type BlogItem = {
-  metadata: {
-    tags: string[];
-  };
-  sys: {
-    space: {
-      sys: any;
-    };
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    environment: {
-      sys: any;
-    };
-    revision: number;
-    contentType: {
-      sys: any;
-    };
-    locale: string;
-  };
-  fields: BlogFields
 }
-
-
-
