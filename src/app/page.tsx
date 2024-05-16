@@ -25,30 +25,35 @@ export default async function Home() {
   return (
     <div>
       <Navbar />
-      <main className="flex min-h-screen flex-col p-24 gap-y-8">
-        <div className="grid grid-cols-2 gap-16">
-          {blogEntries.map((singlePost, index) => {
+
+      <div className="max-w-lg min-h-screen  overflow-hidden md:max-w-full md:m-20 flex justify-center items-center">
+        <main className="flex min-h-screen flex-col gap-y-8 md:mt-16 justify my-20">
+          {blogEntries.map((singlePost) => {
             const { slug, title, date, thumbnail } = singlePost.fields;
             const imageUrl = thumbnail.fields.file.url;
             return (
-              <div key={slug} className="bg-white rounded-lg shadow-md flex">
+              <div
+                key={slug}
+                className="md:flex rounded-xl items-center p-6 bg-white shadow-lg"
+              >
                 {imageUrl && (
-                  <div className="w-1/2 flex items-center justify-center">
+                  <div className="md:shrink-0">
                     <Link className="group" href={`/articles/${slug}`}>
                       <img
                         src={imageUrl}
                         alt={title}
-                        className="w-full h-auto rounded-t-lg"
+                        className="rounded-lg h-48 w-full object-cover md:h-full md:w-48"
                       />
                     </Link>
                   </div>
                 )}
-                <div className="w-1/2 p-4 flex flex-col justify-between">
+
+                <div className="flex flex-col justify-between p-8">
                   <Link className="group" href={`/articles/${slug}`}>
-                    <h2 className="font-extrabold text-xl group-hover:text-blue-500 transition-colors mb-2">
+                    <h2 className="font-extrabold text-xl group-hover:text-blue-500 transition-colors mb-2 ">
                       {title}
                     </h2>
-                    <span className="text-gray-500 block">
+                    <span className="text-gray-500">
                       Posted on{" "}
                       {new Date(date).toLocaleDateString("en-US", {
                         year: "numeric",
@@ -61,8 +66,8 @@ export default async function Home() {
               </div>
             );
           })}
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

@@ -48,20 +48,26 @@ export default async function BlogPage(props: BlogPageProps) {
   return (
     <div>
       <Navbar />
-      <main className="min-h-screen p-24 flex justify-center">
-        <div className="max-w-2xl">
-          <h1 className="font-extrabold text-3xl mb-2">{title}</h1>
-          <p className="mb-6 text-slate-400 ">
-            Posted on{" "}
-            {new Date(date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
-          <img src={imageUrl} alt={title} width={500} height={300} />
-          <div className="mb-8 font-extrabold">
-            {documentToReactComponents(content)}
+      <main className="min-h-screen p-2 flex justify-center my-20">
+        <div className="max-w-2xl bg-white rounded-lg shadow-md overflow-hidden">
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-full h-64 object-cover"
+          />
+          <div className="p-6">
+            <h1 className="font-extrabold text-3xl mb-2">{title}</h1>
+            <p className="mb-6 text-slate-400">
+              Posted on{" "}
+              {new Date(date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+            <div className="space-y-4">
+              {documentToReactComponents(content)}
+            </div>
           </div>
         </div>
       </main>
